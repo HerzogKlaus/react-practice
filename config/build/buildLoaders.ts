@@ -29,20 +29,22 @@ export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
     },
   };
 
-  const lessLoader = {
-    test: /\.less$/i,
+  const scssLoader = {
+    test: /\.s[ac]ss$/i,
     use: [
       isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
       {
         loader: 'css-loader',
         options: {
           modules: {
-            auto: (resPath: string) => (/\.module\./g).test(resPath),
-            localIdentName: isDev ? '[path][name]__[local]--[hash:base64:5]' : '[hash:base64:8]',
+            auto: (resPath: string) => Boolean(resPath.includes('.module.')),
+            localIdentName: isDev
+              ? '[path][name]__[local]--[hash:base64:5]'
+              : '[hash:base64:8]',
           },
         },
       },
-      'less-loader',
+      'sass-loader',
     ],
   };
 
@@ -66,6 +68,6 @@ export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
     fileLoader,
     babelLoader,
     typescriptLoader,
-    lessLoader,
+    scssLoader,
   ];
 }

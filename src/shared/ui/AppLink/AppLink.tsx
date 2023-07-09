@@ -1,7 +1,7 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Link, LinkProps } from 'react-router-dom';
 import React, { FC, PropsWithChildren } from 'react';
-import classes from './AppLink.module.less';
+import classes from './AppLink.module.scss';
 
 export enum AppLinkTheme {
   PRIMARY = 'primary',
